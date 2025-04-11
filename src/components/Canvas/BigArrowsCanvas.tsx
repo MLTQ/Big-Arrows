@@ -102,7 +102,12 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
     onArrowSelect(edge.id);
   }, [onArrowSelect]);
   
-  // Handle node drag to update position in store
+  // Handle node drag to update position in store 
+  const onNodeDrag: NodeDragHandler = useCallback((event, node) => {
+    updateNode(currentFrameId, node.id, { position: node.position });
+  }, [currentFrameId, updateNode]);
+  
+  // Also update position when drag stops
   const onNodeDragStop: NodeDragHandler = useCallback((event, node) => {
     updateNode(currentFrameId, node.id, { position: node.position });
   }, [currentFrameId, updateNode]);
@@ -117,6 +122,7 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
         onConnect={onConnect}
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
+        onNodeDrag={onNodeDrag}
         onNodeDragStop={onNodeDragStop}
         fitView
       >
