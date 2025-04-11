@@ -5,7 +5,8 @@ import classNames from 'classnames';
 const CustomNode: React.FC<NodeProps> = ({ 
   data, 
   isConnectable,
-  selected 
+  selected, 
+  dragging
 }) => {
   const nodeType = data.type || 'proposition';
   
@@ -14,7 +15,9 @@ const CustomNode: React.FC<NodeProps> = ({
       className={classNames(
         'node',
         `node-${nodeType}`,
-        { 'ring-2 ring-white': selected }
+        { 'ring-2 ring-white': selected },
+        { 'cursor-grabbing': dragging },
+        'cursor-grab'
       )}
     >
       <Handle

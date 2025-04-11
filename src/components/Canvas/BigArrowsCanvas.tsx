@@ -10,6 +10,7 @@ import ReactFlow, {
   OnConnect,
   NodeMouseHandler,
   EdgeMouseHandler,
+  NodeDragHandler,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import useArrowsStore from '../../store/useArrowsStore';
@@ -44,7 +45,8 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
     currentFrameId, 
     expandedArrowId,
     collapseArrow,
-    createArrow
+    createArrow,
+    updateNode
   } = useArrowsStore();
   
   const currentFrame = frames[currentFrameId];
@@ -55,6 +57,7 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
       id: node.id,
       type: node.type,
       position: node.position,
+      draggable: true,
       data: { 
         ...node, 
         label: node.content, 
@@ -99,6 +102,11 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
     onArrowSelect(edge.id);
   }, [onArrowSelect]);
   
+  // Handle node drag to update position in store
+  const onNodeDragStop: NodeDragHandler = useCallback((event, node) => {
+    updateNode(currentFrameId, node.id, { position: node.position });
+  }, [currentFrameId, updateNode]);
+  
   return (
     <div className="frame-container">
       <ReactFlow
@@ -109,6 +117,7 @@ const BigArrowsCanvas: React.FC<BigArrowsCanvasProps> = ({
         onConnect={onConnect}
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
+        onNodeDragStop={onNodeDragStop}
         fitView
       >
         <Background color="#6366f1" gap={16} />
