@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a2e;
+  color: white;
+}
+
+.frame-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #3b82f6;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #1a1a2e;
+}
+
+.node {
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  border-width: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-proposition {
+  background-color: #1e3a8a;
+  border-color: #3b82f6;
+}
+
+.node-axiom {
+  background-color: #312e81;
+  border-color: #a5b4fc;
+}
+
+.node-assumption {
+  background-color: #331166;
+  border-color: #d8b4fe;
+}
+
+.arrow {
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+}
+
+.arrow-expandable {
+  stroke: #ff6b6b;
+}
+.arrow-expandable:hover {
+  stroke: #ff9e9e;
+}
+
+.expanded-frame {
+  border-width: 2px;
+  border-style: dashed;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  border-color: #ff6b6b;
+  background-color: rgba(26, 26, 46, 0.95);
+}
